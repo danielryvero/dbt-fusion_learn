@@ -1,0 +1,18 @@
+models:
+  - name: stg_stripe__payment
+    description: Containing the payment information for the orders
+    columns:
+      - name: payment_id
+        description: '{{ doc("col_intro") }} Unique payment ID'
+        data_tests:
+          - unique 
+          - not_null
+      - name: order_id
+        description: foreign key of order_id in the orders table
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_jaffle_shop__orders')
+                field: order_id
+      - name: amount
+        description: '{{ doc("col_intro") }} Amount in cents'
